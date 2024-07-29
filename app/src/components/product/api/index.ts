@@ -1,9 +1,13 @@
 import { Router } from "express";
-import queries from "./queries";
-import commands from "./commands";
+import getProducts from "./getProducts";
+import createProduct from "./createProduct";
+
 
 
 const router = Router()
-router.use(queries, commands)
+
+router
+	.use(getProducts)
+	.use(createProduct)
 
 export default router

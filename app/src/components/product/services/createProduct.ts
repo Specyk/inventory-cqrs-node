@@ -1,7 +1,12 @@
 import { db } from "../../../config/db";
-import { Product } from "../interfaces/Product";
+import { generateUuid } from "../../../utils/uuid";
+import { CreateProductData } from "../interfaces/CreateProductData";
 
-export async function createProduct(product: Product) {
-	db.data.products.push(product)
+export async function createProduct(product: CreateProductData) {
+	await db.read()
+	db.data.products.push({
+		...product,
+		id: generateUuid()
+	})
 	await db.write()
 }

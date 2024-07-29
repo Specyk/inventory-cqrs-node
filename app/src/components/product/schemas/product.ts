@@ -6,3 +6,5 @@ export const productSchema = z.object({
   price: z.number().nonnegative("Price must be non-negative value"),
   stock: z.number().int().nonnegative("Stock must be a non-negative integer")
 });
+
+export type CreateProductBody = z.infer<typeof productSchema>
