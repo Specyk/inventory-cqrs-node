@@ -3,10 +3,6 @@ import sellProducts from "./sellProducts";
 import restockProduct from "./restockProduct";
 
 
-
-
-
-
 const router = Router()
 
 router

@@ -10,7 +10,7 @@ const router = express.Router();
 router.post('/products/:id/restock', validateBodyWithSchema(sellOrRestockProductSchema), async (req: Request<{id: string}, ChangeProductStockLevelBody>, res: Response) => {
 	const command = new RestockProductCommand(req.params.id, req.body.count)
 	await restockProductCommandHandler(command)
-	res.status(204)
+	res.status(204).send()
 })
 
 export default router

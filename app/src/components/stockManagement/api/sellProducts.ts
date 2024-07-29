@@ -11,10 +11,15 @@ type SellProductsParameters = {
 	id: string;
 };
 
-router.post('/products/:id/sell', validateBodyWithSchema(sellOrRestockProductSchema), async (req: Request<SellProductsParameters, ChangeProductStockLevelBody>, res: Response) => {
+router.post('/products/:id/sell', validateBodyWithSchema(sellOrRestockProductSchema), async (req: Request<SellProductsParameters, ChangeProductStockLevelBody>, res: Response, next) => {
 	const command = new SellProductsCommand(req.params.id, req.body.count)
-	await sellProductsCommandHandler(command)
-	res.status(204)
+
+	try {
+		await sellProductsCommandHandler(command)
+		res.status(204).send()
+	} catch(err) {
+		next(err)
+	}
 })
 
 export default router
