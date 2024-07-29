@@ -1,11 +1,13 @@
 import { Low } from 'lowdb/lib/core/Low'
 import { JSONFilePreset } from 'lowdb/node'
 import path from 'path'
+import { generateUuid } from '../utils/uuid'
 
 
 const initialData = {
 	products: [
 		{
+			id: generateUuid(),
 			name: 'first product',
 			description: 'first product description',
 			price: 10,
