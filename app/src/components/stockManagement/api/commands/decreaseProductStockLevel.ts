@@ -6,7 +6,7 @@ import { increaseProductStockLevel } from '../../services/increaseProductStockLe
 
 const router = express.Router();
 
-router.post('/products/:id/restock', validateBodyWithSchema(changeProductStockLevelSchema), async (req: Request<{id: string}, ChangeProductStockLevelBody>, res: Response) => {
+router.post('/products/:id/sell', validateBodyWithSchema(changeProductStockLevelSchema), async (req: Request<{id: string}, ChangeProductStockLevelBody>, res: Response) => {
 	await increaseProductStockLevel(req.params.id, req.body.count)
 	res.status(204)
 })
