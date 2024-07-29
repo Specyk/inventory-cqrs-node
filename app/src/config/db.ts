@@ -7,11 +7,20 @@ import { generateUuid } from '../utils/uuid'
 const initialData = {
 	products: [
 		{
-			id: generateUuid(),
+			id: 'first-item-id',
 			name: 'first product',
 			description: 'first product description',
 			price: 10,
 			stock: 5
+		}
+	],
+	orders: [
+		{
+			id: 'first-order-id',
+			items: [{
+				productId: 'first-item-id',
+				count: 2
+			}]
 		}
 	]
 }
