@@ -1,6 +1,6 @@
 import { db } from "../../../config/db";
 import ConflictException from "../../../exception/ConflictException";
-import { getProductById } from "./getProductById";
+import { getProductById } from "../../product/services/getProductById";
 
 export async function decreaseProductStockLevel(productId: string, count: number) {
 	const product = getProductById();
