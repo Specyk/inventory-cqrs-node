@@ -1,10 +1,16 @@
 import express from 'express'
+import { setupDb } from './config/db'
+import router from './components/router'
 
 
-const app = express()
 
-const port = process.env.HTTP_SERVER_PORT
+void async function main() {
+	await setupDb()
 
-app.get('/', (req, res) => res.send('Hello World!'))
+	const app = express()
 
-app.listen(port, () => console.log(`App is listening on port ${port}!`))
+	const port = process.env.HTTP_SERVER_PORT
+	app.use(router)
+
+	app.listen(port, () => console.log(`App is listening on port ${port}!`))
+}()

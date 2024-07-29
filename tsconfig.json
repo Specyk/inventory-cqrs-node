@@ -3,11 +3,19 @@
         "lib": [
             "es2023"
         ],
-        "module": "node16",
+        "module": "Node16",
         "target": "es2022",
         "strict": true,
         "esModuleInterop": true,
         "skipLibCheck": true,
-        "moduleResolution": "node16"
-    }
+        "moduleResolution": "Node"
+    },
+    "include": [
+        "app/**/*.ts"
+, "app/src/main.ts"    ],
+    "exclude": [
+        "node_modules",
+        "app/test/**/*.ts"
+    ]
+
 }
