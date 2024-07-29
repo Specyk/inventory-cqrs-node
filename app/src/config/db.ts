@@ -1,5 +1,6 @@
 import { Low } from 'lowdb/lib/core/Low'
 import { JSONFilePreset } from 'lowdb/node'
+import path from 'path'
 
 
 const initialData = {
@@ -17,5 +18,6 @@ const initialData = {
 export let db: Low<typeof initialData>
 
 export async function setupDb() {
-	 db = await JSONFilePreset('../../data/db.json', initialData)
+	const dbFilePath = path.join(process.cwd(), 'app/data/db.json')
+	 db = await JSONFilePreset(dbFilePath,  initialData)
 }
