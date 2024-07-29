@@ -1,9 +1,8 @@
 import { Router } from "express";
-import productsApi from "./product/api";
+import api from "./stockManagement/api";
 
 
 const router = Router()
-
-router.use(productsApi)
+router.use(api)
 
 export default router
