@@ -1,17 +1,21 @@
 import express, { Request, Response } from 'express';
 import { validateBodyWithSchema } from '../../../middlewares/validateBodyWithSchema';
-import { changeProductStockLevelSchema } from '../../schemas/changeProductStockLevel';
-import { CreateOrderBody, orderSchema } from '../schemas/order';
 import { CreateOrderCommand } from '../commands/CreateOrderCommand';
 import { createOrderHandler } from '../handlers/commands/createOrderHandler';
+import { CreateOrderBody, orderSchema } from '../schemas/order';
 
 
 const router = express.Router();
 
-router.post('/orders', validateBodyWithSchema(orderSchema), async (req: Request<{}, CreateOrderBody>, res: Response) => {
+router.post('/orders', validateBodyWithSchema(orderSchema), async (req: Request<{}, CreateOrderBody>, res: Response, next) => {
 	const command = new CreateOrderCommand(req.body)
-	await createOrderHandler(command)
-	res.status(204)
+
+	try {
+		await createOrderHandler(command)
+		res.status(204)
+	} catch(err) {
+		next(err)
+	}
 })
 
 export default router

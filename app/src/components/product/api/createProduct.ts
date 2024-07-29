@@ -7,10 +7,15 @@ import { CreateProductBody, productSchema } from '../schemas/product';
 
 const router = express.Router();
 
-router.post('/products', validateBodyWithSchema(productSchema), async (req: Request<{}, CreateProductBody>, res: Response) => {
+router.post('/products', validateBodyWithSchema(productSchema), async (req: Request<{}, CreateProductBody>, res: Response, next) => {
 	const command = new CreateProductCommand(req.body)
-	const data = await createProductHandler(command)
-	res.json(data)
+
+	try {
+		const data = await createProductHandler(command)
+		res.json(data)
+	} catch(err) {
+		next(err)
+	}
 })
 
 export default router
