@@ -1,6 +1,5 @@
-import { text } from "body-parser"
-import { decreaseProductStockLevel } from "../../../../../src/components/stockManagement/services/decreaseProductStockLevel"
 import ProductModel from "../../../../../src/components/product/models/Product"
+import { decreaseProductStockLevel } from "../../../../../src/components/stockManagement/services/decreaseProductStockLevel"
 
 describe('decreaseProductStockLevel.spec', () => {
 	test('should decrease stock value for product', async () => {
