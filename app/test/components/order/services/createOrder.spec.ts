@@ -28,5 +28,32 @@ describe('order', () => {
 			expect(productAfter!.stock).toBe(2)
 			expect(ordersAfter).toBe(ordersBefore + 1)
 		 })
+
+		 test('should throw an error when not enough product in stock', async () => {
+			const ordersBefore = await OrderModel.countDocuments()
+
+			const product = await ProductModel.create({
+				name: 'mock-product-name',
+				price: 10,
+				description: 'some description',
+				stock: 1
+			})
+
+			await createOrder('mock-customer-id', [
+				{
+					productId: product.id,
+					count: 3
+				}
+			])
+
+			expect(createOrder('mock-customer-id', [
+				{
+					productId: product.id,
+					count: 3
+				}
+			])).rejects.toThrow(expect.objectContaining({
+				statusCode: 409
+			}))
+		 })
 	 })
  })
