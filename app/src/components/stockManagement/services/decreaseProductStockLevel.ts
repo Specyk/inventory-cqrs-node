@@ -1,4 +1,3 @@
-import { db } from "../../../config/db";
 import ConflictException from "../../../exception/ConflictException";
 import { getProductById } from "../../product/services/getProductById";
 
@@ -10,5 +9,5 @@ export async function decreaseProductStockLevel(productId: string, count: number
 	}
 
 	product.stock -= count
-	await db.write()
+	await product.save()
 }

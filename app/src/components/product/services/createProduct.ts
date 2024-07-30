@@ -1,12 +1,7 @@
-import { db } from "../../../config/db";
-import { generateUuid } from "../../../utils/uuid";
 import { CreateProductData } from "../interfaces/CreateProductData";
+import ProductModel from "../models/Product";
 
-export async function createProduct(product: CreateProductData) {
-	await db.read()
-	db.data.products.push({
-		...product,
-		id: generateUuid()
-	})
-	await db.write()
+export async function createProduct(data: CreateProductData) {
+	const product = await ProductModel.create(data)
+	return product
 }

@@ -1,34 +1,18 @@
-import { Low } from 'lowdb/lib/core/Low'
-import { JSONFilePreset } from 'lowdb/node'
-import path from 'path'
-import { generateUuid } from '../utils/uuid'
+import mongoose from 'mongoose';
+import { logger } from '../utils/logger';
 
 
-const initialData = {
-	products: [
-		{
-			id: 'first-item-id',
-			name: 'first product',
-			description: 'first product description',
-			price: 10,
-			stock: 5
-		}
-	],
-	orders: [
-		{
-			id: 'first-order-id',
-			items: [{
-				productId: 'first-item-id',
-				count: 2
-			}]
-		}
-	]
-}
+export async function connectDB() {
+	if (!process.env.MONGO_URL) {
+		logger.error('No MONGO_URL in env')
+		process.exit()
+	}
 
-
-export let db: Low<typeof initialData>
-
-export async function setupDb() {
-	const dbFilePath = path.join(process.cwd(), 'app/data/db.json')
-	 db = await JSONFilePreset(dbFilePath,  initialData)
+	try {
+		await mongoose.connect(process.env.MONGO_URL, {});
+		console.log('MongoDB connected successfully');
+	} catch (error) {
+		console.error('MongoDB connection failed:', (error as Error).message);
+		process.exit(1);
+	}
 }

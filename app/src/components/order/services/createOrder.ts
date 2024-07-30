@@ -1,12 +1,13 @@
-import { db } from "../../../config/db";
 import ConflictException from "../../../exception/ConflictException";
-import { decreaseProductStockLevel } from "../../stockManagement/services/decreaseProductStockLevel";
-import { OrderItem } from "../commands/CreateOrderCommand";
-import { addOrder } from "../repositories/addOrder";
+import {decreaseProductStockLevel} from "../../stockManagement/services/decreaseProductStockLevel";
+import {OrderItem} from "../commands/CreateOrderCommand";
+import {addOrder} from "../repositories/addOrder";
+import {getManyProductsWithIds} from "../../product/repositories/getManyProductsWithIds";
+
 
 export async function createOrder(customerId: string, products: OrderItem[]) {
 	const productIds = products.map(productInOrder => productInOrder.productId)
-	const productsInDb = db.data.products.filter(product => productIds.includes(product.id))
+	const productsInDb = await getManyProductsWithIds(productIds)
 
 	const productIdsOutOfStock: string[] = []
 	for(let i=0; i<productsInDb.length; i++) {
@@ -22,6 +23,6 @@ export async function createOrder(customerId: string, products: OrderItem[]) {
 
 	// * better solution to use 1 query to db for better performance
 	await Promise.all(productsInDb.map((product, i) => decreaseProductStockLevel(product.id, products[i].count)))
-
 	await addOrder(products);
 }
+

@@ -12,7 +12,7 @@ router.post('/orders', validateBodyWithSchema(orderSchema), async (req: Request<
 
 	try {
 		await createOrderHandler(command)
-		res.status(204)
+		res.status(204).send()
 	} catch(err) {
 		next(err)
 	}

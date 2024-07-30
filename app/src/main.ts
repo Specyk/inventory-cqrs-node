@@ -1,6 +1,6 @@
 import express from 'express'
 import dotenv from 'dotenv'
-import { setupDb } from './config/db'
+import { connectDB } from './config/db'
 import router from './components/router'
 import {handleError} from './middlewares/handleError'
 
@@ -8,7 +8,7 @@ import {handleError} from './middlewares/handleError'
 dotenv.config()
 
 void async function main() {
-	await setupDb()
+	await connectDB()
 
 	const app = express()
 	const port = process.env.HTTP_SERVER_PORT
