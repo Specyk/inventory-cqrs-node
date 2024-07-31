@@ -129,6 +129,7 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+!jest.config.js
 
 # Editor configs
 .vscode
