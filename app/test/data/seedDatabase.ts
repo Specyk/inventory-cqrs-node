@@ -15,23 +15,23 @@ export async function seedDatabase() {
 	]);
 
 	const products = await ProductModel.create([
-		{ name: 'Laptop', price: 999.99, stock: 5 },
-		{ name: 'Smartphone', price: 699.99, stock: 5 },
-		{ name: 'Tablet', price: 499.99, stock: 5 },
+		{ name: 'Laptop', description: 'desc', price: 999.99, stock: 5 },
+		{ name: 'Smartphone', description: 'desc',price: 699.99, stock: 5 },
+		{ name: 'Tablet', description: 'desc', price: 499.99, stock: 5 },
 	]);
 
 	await OrderModel.create([
 		{
-			customer: customers[0]._id,
+			customerId: customers[0]._id,
 			products: [
-				{ product: products[0]._id, quantity: 1 },
-				{ product: products[1]._id, quantity: 2 },
+				{ productId: products[0]._id, count: 1 },
+				{ productId: products[1]._id, count: 2 },
 			],
 		},
 		{
-			customer: customers[1]._id,
+			customerId: customers[1]._id,
 			products: [
-				{ product: products[2]._id, quantity: 1 },
+				{ productId: products[2]._id, count: 1 },
 			],
 		},
 	]);
