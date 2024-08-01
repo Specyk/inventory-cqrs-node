@@ -15,11 +15,7 @@ Follow these steps to run the project in development mode:
     ```
 
 2. **Install Dependencies:**
-    You can use either npm or yarn to install the required dependencies.
-    ```bash
-    npm install
-    ```
-    or
+    Use yarn to install the required dependencies.
     ```bash
     yarn install
     ```
