@@ -28,7 +28,7 @@
 	"scripts": {
 		"start": "tsx app/src/main",
 		"dev": "tsx watch --inspect app/src/main",
-		"build": "npm run clean && tsc --project tsconfig.build.json",
+		"build": "tsc --project tsconfig.build.json",
 		"start:dist": "node app/src/main",
 		"test": "jest",
 		"test:watch": "jest --watchAll",
